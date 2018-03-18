@@ -2,7 +2,7 @@ module io_manage
 
     type input_type
         real*8   :: dt, p_int, p_ext, t_int, t_ext
-        real*8   :: area(4), comp_vol(3), cd, time_end
+        real*8   :: area, comp_vol, cd, time_end
         integer  :: ncomp
     end type input_type
     
@@ -25,9 +25,7 @@ module io_manage
                 if (is_iostat_end(stat)) exit
                 
                 select case (line(1:8)) 
-                
-                    case('COMP_NUM')   ! Number of compartments
-                        read(line,*) line(1:8), inp%ncomp, aux 
+                 
                     case('TIMESTEP')   ! Time Step
                         read(line,*) line(1:8), inp%dt, aux
                     case('EXTPRESS')   ! External Pressure
@@ -40,23 +38,13 @@ module io_manage
                     case('INT_TEMP')   ! Internal Temperature
                         read(line,*) line(1:8), inp%t_int, aux
                         inp%t_int = inp%t_int + T0
-                    case('COMPVOL1')   ! Compartment volume
-                        read(line,*) line(1:8), inp%comp_vol(1), aux        
-                    case('COMPVOL2')   ! Compartment volume
-                        read(line,*) line(1:8), inp%comp_vol(2), aux
-                    case('COMPVOL3')   ! Compartment volume
-                        read(line,*) line(1:8), inp%comp_vol(3), aux        
-                    case('HAREA_10')   
-                        read(line,*) line(1:8), inp%area(1), aux      
-                    case('HAREA_12')   
-                        read(line,*) line(1:8), inp%area(2), aux
-                    case('HAREA_23')   
-                        read(line,*) line(1:8), inp%area(3), aux
-                    case('HAREA_31')   
-                        read(line,*) line(1:8), inp%area(4), aux
+                    case('COMP_VOL')   ! Compartment volume
+                        read(line,*) line(1:8), inp%comp_vol, aux        
+                    case('OPENAREA')   
+                        read(line,*) line(1:8), inp%area, aux
                     case('DISCOEFF')   ! Discharge coefficient
                         read(line,*) line(1:8), inp%cd, aux     
-                    case('TIME_END')   ! Time evaluation
+						case('TIME_END')   ! Time evaluation
                         read(line,*) line(1:8), inp%time_end, aux   
                               
                 endselect 
