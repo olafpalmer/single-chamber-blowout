@@ -24,7 +24,7 @@ contains
     
         real*8, intent(in)  :: Area, Vi, Ti, Pi, Pj, rhoi, rhoj, Cd
         real*8              :: drho_dt
-        real*8  :: P_chocked, Aeff, mij_dot, aux
+        real*8  :: P_chocked, Aeff, mij_dot
         
         P_chocked = Pj*((gamma + 1)/2)**(gamma/(gamma - 1))
         Aeff = Area*Cd
