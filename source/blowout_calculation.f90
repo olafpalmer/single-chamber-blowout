@@ -20,8 +20,8 @@ character*60            :: file_input
 type(input_type)        :: inp
 
 integer               ::  time_steps, i
-real*8                ::  rho_ext, press, temp      ! initial conditions
-real*8, allocatable   ::  P(:,:), rho(:,:), T(:,:)  ! state parameters
+real*8                ::  rho_ext      ! initial conditions
+real*8, allocatable   ::  P(:), rho(:), T(:)  ! state parameters
 !-----------------------------------------------------------------------
 
 
@@ -39,9 +39,9 @@ inp = get_inputs(file_input)
 
 time_steps = floor(inp%time_end/inp%dt) + 1
 
-allocate(P(time_steps,3))
-allocate(T(time_steps,3))
-allocate(rho(time_steps,3))
+allocate(P(time_steps))
+allocate(T(time_steps))
+allocate(rho(time_steps))
 
 ! Initializing
 P(1) = inp%p_int 
@@ -60,7 +60,6 @@ do i = 2,time_steps
     ! Updating the parameters     
     call update_param(P(i),T(i),rho(i),rho(1), P(1), T(1))  
     
-    write(*,'(A,I6,A,I6,F10.1)') 'Iteration: ', i-1, ' of ', time_steps-1, P(i-1) 
 end do    
 
 !-----------------------------------------------------------------------
@@ -69,6 +68,8 @@ end do
 write(*,*) '3) Writing Outputs '
 
 call write_output(inp%dt,time_steps, P, T, rho)
+write(*,*) ''
+write(*,*) 'Check single_chamber_results.txt. Press any key to continue... '
 read(*,*)
 
 !-----------------------------------------------------------------------
