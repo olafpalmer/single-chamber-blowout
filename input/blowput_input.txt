@@ -3,25 +3,18 @@ $  BLOWOUT CALCULATION
 $  INPUT FILE 
 $----------------------------------------------------------------------
 ! Control parameters
-COMP_NUM   3         ! Number of compartments
 TIMESTEP   0.001     ! Value of the time step (Delta_t)
 DISCOEFF   1.0       ! Discharge coefficient
-TIME_END   3.0       ! Final time of evaluation
+TIME_END   1.0       ! Final time of evaluation
 
 ! Initial conditions
-EXTPRESS     30089.6   ! External Pressure [Pa]
-INTPRESS     78697.6    ! Internal Pressure [Pa]
-EXT_TEMP     -44.44       ! External Temperature [°C]
+EXTPRESS     26428.9   ! External Pressure [Pa]
+INTPRESS     117013    ! Internal Pressure [Pa]
+EXT_TEMP     -50.0       ! External Temperature [°C]
 INT_TEMP     23        ! Internal Temperature [°C]
 
 ! Compartments Volumes [m^3]
-COMPVOL1      14.72      
-COMPVOL2      98.68 
-COMPVOL3      207.9
+COMP_VOL     4.0      ! Volume of the compartment (m^3)
 
 ! Opening Areas [m^2]
-HAREA_10      0.511
-HAREA_12      0.019    
-HAREA_23      0.789    
-HAREA_31      1.115    
-
+OPENAREA      0.4     ! Opening Area (m^2)
